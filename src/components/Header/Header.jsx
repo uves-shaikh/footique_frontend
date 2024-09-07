@@ -10,7 +10,7 @@ import { Context } from "../../utils/context";
 
 import "./Header.scss";
 const Header = () => {
-    const {cartCount} = useContext(Context)
+    const { cartCount } = useContext(Context)
     const [scrolled, setScrolled] = useState(false);
     const [ShowSearch, setShowSearch] = useState(false);
     const [showCart, setShowCart] = useState(false);
@@ -42,7 +42,7 @@ const Header = () => {
                     </ul>
                     <div className="center" onClick={() => navigate("/")}>Footique</div>
                     <div className="right">
-                        <BsSearch onClick={() => setShowSearch(true)}/>
+                        <BsSearch onClick={() => setShowSearch(true)} />
                         <span className="cart-icon" onClick={() => setShowCart(true)}>
                             <AiOutlineShoppingCart />
                             {!!cartCount && <span>{cartCount}</span>}
@@ -50,8 +50,8 @@ const Header = () => {
                     </div>
                 </div>
             </header>
-            {showCart && <Cart setShowCart={setShowCart}/>}
-            {ShowSearch && <Search setShowSearch={setShowSearch}/>}
+            {showCart && <Cart setShowCart={setShowCart} />}
+            {ShowSearch && <Search setShowSearch={setShowSearch} />}
         </>
     );
 };

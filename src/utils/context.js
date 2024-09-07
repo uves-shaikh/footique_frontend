@@ -12,8 +12,8 @@ const AppContext = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
-        window.scrollTo(0,0)
-    },[location])
+        window.scrollTo(0, 0)
+    }, [location])
 
     useEffect(() => {
         let count = 0
@@ -45,10 +45,10 @@ const AppContext = ({ children }) => {
     const handleCartProductQuantity = (type, product) => {
         let items = [...cartItems];
         let index = items.findIndex((p) => p.id === product.id);
-        if(type === "inc"){
+        if (type === "inc") {
             items[index].attributes.quantity += 1
-        } else if(type === "dec") {
-            if(items[index].attributes.quantity === 1) return;
+        } else if (type === "dec") {
+            if (items[index].attributes.quantity === 1) return;
             items[index].attributes.quantity -= 1
         }
         setCartItems(items);

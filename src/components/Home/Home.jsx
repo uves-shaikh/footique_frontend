@@ -7,27 +7,32 @@ import Category from "./Category/Category";
 import Products from "../Products/Products";
 import { fetchDataFromApi } from "../../utils/api";
 import { Context } from "../../utils/context";
+import { storedCategories } from "../../constant/categories"
+import { storedProducts } from "../../constant/products"
 
 const Home = () => {
     const { categories, setCategories, products, setProducts } = useContext(Context);
     useEffect(() => {
-        getProducts();
-        getCategories();
+        setProducts(storedProducts)
+        setCategories(storedCategories)
+
+        // getProducts();
+        // getCategories();
     }, []);
 
-    const getProducts = () => {
-        fetchDataFromApi("/api/products?populate=*").then(res => {
-            console.log(res)
-            setProducts(res)
-        });
-    }
+    // const getProducts = () => {
+    //     fetchDataFromApi("/api/products?populate=*").then(res => {
+    //         // console.log(res)
+    //         setProducts(res)
+    //     });
+    // }
 
-    const getCategories = () => {
-        fetchDataFromApi("/api/categories?populate=*").then(res => {
-            console.log(res)
-            setCategories(res)
-        });
-    }
+    // const getCategories = () => {
+    //     fetchDataFromApi("/api/categories?populate=*").then(res => {
+    //         // console.log(res)
+    //         setCategories(res)
+    //     });
+    // }
 
     return (
         <div>

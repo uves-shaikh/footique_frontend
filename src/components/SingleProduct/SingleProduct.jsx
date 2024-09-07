@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react'
+import { useState, useContext } from 'react'
 import './SingleProduct.scss'
 import RelatedProducts from './RelatedProducts/RelatedProducts'
 import { BsFacebook, BsTwitter, BsInstagram, BsFillCartPlusFill } from 'react-icons/bs'
@@ -8,14 +8,19 @@ import { FaPinterestP } from 'react-icons/fa'
 import useFetch from "../../hooks/useFetch"
 import { useParams } from 'react-router-dom'
 import { Context } from '../../utils/context'
+import { singleProducts } from '../../constant/singleProduct'
 
 const SingleProduct = () => {
 
     const [quantity, setQuantity] = useState(1)
 
     const { id } = useParams()
-    const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`)
-    const {handleAddToCart} = useContext(Context)
+    // const { data } = useFetch(`/api/products?populate=*&[filters][id]=${id}`)
+    const { handleAddToCart } = useContext(Context)
+
+    const data = singleProducts
+
+    console.log(data);
 
     const increment = () => {
         setQuantity((prevState) => {
@@ -33,19 +38,19 @@ const SingleProduct = () => {
 
     if (!data) return;
 
-    const product = data.data[0].attributes
+    const product = data?.data[0]?.attributes
 
     return (
         <div className='single-product-main-content'>
             <div className="layout">
                 <div className="single-product-page">
                     <div className="left">
-                        <img src={product.img.data[0].attributes.url} alt="" />
+                        <img src={product?.img?.data[0]?.attributes?.url} alt="" />
                     </div>
                     <div className="right">
-                        <span className="name">{product.title} </span>
-                        <span className="price">&#8377;{product.price} </span>
-                        <span className="desc">{product.desc} </span>
+                        <span className="name">{product?.title} </span>
+                        <span className="price">&#8377;{product?.price} </span>
+                        <span className="desc">{product?.desc} </span>
 
                         <div className="cart-buttons">
                             <div className="quentity-buttons">
@@ -54,7 +59,7 @@ const SingleProduct = () => {
                                 <span onClick={increment}>+</span>
                             </div>
                             <button className='add-to-cart-button' onClick={() => {
-                                handleAddToCart(data.data[0], quantity)
+                                handleAddToCart(data?.data[0], quantity)
                                 setQuantity(1)
                             }} >
                                 <BsFillCartPlusFill size={20} />
@@ -68,7 +73,7 @@ const SingleProduct = () => {
                             <span className="text-bold">
                                 Category :{" "}
                                 <span>{
-                                    product.categories.data[0].attributes.title
+                                    product?.categories?.data[0]?.attributes?.title
                                 }</span>
                             </span>
                             <span className="text-bold">
@@ -84,7 +89,7 @@ const SingleProduct = () => {
                         </div>
                     </div>
                 </div>
-                <RelatedProducts productId={id} categoryId={product.categories.data[0].id} />
+                <RelatedProducts productId={id} categoryId={product?.categories?.data[0]?.id} />
             </div>
         </div>
     );

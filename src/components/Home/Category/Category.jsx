@@ -10,12 +10,12 @@ const Category = ({ categories }) => {
     <div className="shop-by-category">
       <div className="categories">
         {
-          categories && categories.data ?
-            categories.data.map((item) => {
+          categories && categories?.data ?
+            categories?.data?.map((item) => {
               return (
-                <div key={item.id} className="category" onClick={() => navigate(`/category/${item.id}`)}>
-                  {item.id}
-                  <img src={item.attributes.img.data.attributes.url} alt="" />
+                <div key={item?.id} className="category" onClick={() => navigate(`/category/${item?.id}`)}>
+                  {item?.id}
+                  <img src={item?.attributes?.img?.data?.attributes?.url} alt="" />
                 </div>
               )
             }) : (
